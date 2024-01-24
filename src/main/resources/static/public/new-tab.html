@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout ">
+    <head>
+        <title>New Tab</title>
+        <!--/* Used only for editing in Pinegrow -->         
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+        <!--*/-->
+        <script>
+            function handleResponse(response) {
+              // Open a new tab with the received HTML content
+              console.log("hello");
+              const newTab = window.open();
+              newTab.document.write(response);
+            }
+        </script>
+    </head>
+    <body>
+        <section layout:fragment="content">
+            <div class="container alert alert-secondary" role="alert">
+                <p>Just wanna show new tab function</p>
+            </div>
+            <div class="container alert alert-secondary" role="alert">
+                <p>Hello, <a href="javascript:handleResponse(response)" hx-get="/public/new-tab/new">pls click me</a>.</p>
+            </div>
+            <div class="container mt-4">
+                <button class="btn btn-primary" hx-get="/public/new-tab/new" hx-trigger="click" href="javascript:handleResponse(response)" target="_blank">Open</button>
+
+                <button class="btn btn-primary" hx-get="/public/new-tab/new" hx-trigger="click" hx-swap="innerHTML" hx-target="#response" hx-on:click="handleResponse(response)">Open New Tab</button>
+            </div>
+
+            <div id="response"></div>
+        </section>
+    </body>
+</html>
